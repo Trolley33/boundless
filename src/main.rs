@@ -287,15 +287,19 @@ fn main() {
 }
 
 fn create_player(world : &mut World, position : Point2) {
-    let asset_handler = world.write_resource::<crate::AssetHandler>();
+    let player_asset: graphics::Image;
+    {
+        let asset_handler = world.write_resource::<crate::AssetHandler>();
+        player_asset = asset_handler.player.clone();
+    }
     
-    world.create_entity_unchecked()
+    world.create_entity()
         .with(components::Transform { 
             position,
             scale : Vector2::new(1.0, 1.0) 
         })
         .with(components::Sprite { image :    {
-                asset_handler.player.clone() 
+                player_asset
             }
         })
         .build();
