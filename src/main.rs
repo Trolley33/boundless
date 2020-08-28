@@ -303,19 +303,28 @@ fn create_player(world : &mut World, position : Point2) {
                 player_asset
             }
         })
+        .with(components::Movement {
+            velocity: Vector2::new(0.0,0.0),
+            acc: Vector2::new(0.0, 0.0)
+        })
+        
         .build();
 }
 
 fn create_background(world : &mut World, position : Point2) {
-    let asset_handler = world.write_resource::<crate::AssetHandler>();
+    let world_asset: graphics::Image;
+    {
+        let asset_handler = world.write_resource::<crate::AssetHandler>();
+        world_asset = asset_handler.background.clone();
+    }
     
-    world.create_entity_unchecked()
+    world.create_entity()
         .with(components::Transform {
             position : position, 
             scale : Vector2::new(5.0, 5.0),
         })
         .with(components::Sprite { image :    {
-            asset_handler.background.clone() 
+            world_asset
         }
     })
     .build();
