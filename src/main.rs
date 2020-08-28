@@ -251,6 +251,7 @@ fn main() {
     world.register::<components::Culled>();
     world.register::<components::TileSpritesheet>();
     world.register::<components::Named>();
+    world.register::<components::Movement>();
 
     // Create Camera at Origin
     let player_pos = Point2::new(-32.0 * 5.0, 32.0 * 7.0);

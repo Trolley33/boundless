@@ -13,6 +13,13 @@ pub struct Sprite {
 
 #[derive(Component)]
 #[storage(VecStorage)]
+pub struct Movement {
+    pub velocity: Vector2,
+    pub acc: Vector2
+}
+
+#[derive(Component)]
+#[storage(VecStorage)]
 pub struct Transform {
     pub position : Point2,
     pub scale    : Vector2,
